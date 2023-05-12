@@ -1,9 +1,3 @@
-
-# Penser à authoriser la connexion sur la plateforme azure dans la webapp / centre déploiement
-# Il faut télécharger le XML qui ressemble à https://<your_web_app_name>.scm.azurewebsites.net:443) 
-# Encoder en base 64 le xml
-# Mettre à jour le secrêt AZURE_CREDENTIALS
-
 name: Deploy Streamlit App to Azure
 
 on:
@@ -37,5 +31,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: hybridrec
-        publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
+        publish-profile: ${{ secrets.WEB_APP_PUBLISH_PROFILE }}
         images: OC09Recommender.azurecr.io/streamlit_app:latest
