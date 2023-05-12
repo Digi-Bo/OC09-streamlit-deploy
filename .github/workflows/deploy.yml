@@ -1,3 +1,6 @@
+
+# Penser à authoriser la connexion sur la plateforme azure dans la webapp / centre déploiement
+
 name: Deploy Streamlit App to Azure
 
 on:
