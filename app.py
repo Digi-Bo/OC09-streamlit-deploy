@@ -32,7 +32,7 @@ if st.button("Recommander des articles"):
         st.error("Les dates de fin doivent être ultérieures aux dates de début.")
     else:
         # Remplacez cette URL par l'URL de votre fonction Azure Functions
-        azure_function_url = "https://your_azure_function_url_here"
+        azure_function_url = "https://hybridrecommender.azurewebsites.net/api/process_data?code=90GdjfqenFG-1BzwhdDpCtk9L4O2ipkWqTDYYSFWiS-xAzFunHtSaA=="
 
         # Envoyer une requête GET à la fonction Azure
         response = requests.get(
