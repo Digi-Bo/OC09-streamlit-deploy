@@ -1,5 +1,8 @@
 
 # Penser à authoriser la connexion sur la plateforme azure dans la webapp / centre déploiement
+# Il faut télécharger le XML qui ressemble à https://<your_web_app_name>.scm.azurewebsites.net:443) 
+# Encoder en base 64 le xml
+# Mettre à jour le secrêt AZURE_CREDENTIALS
 
 name: Deploy Streamlit App to Azure
 
