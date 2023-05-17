@@ -32,18 +32,18 @@ if st.button("Recommander des articles"):
         st.error("Les dates de fin doivent être ultérieures aux dates de début.")
     else:
         # Remplacez cette URL fonction Azure Functions
-        azure_function_url = "https://hybridrecommender.azurewebsites.net/api/httpHybridTrigger?code=nHgeKMkajZAEp8RcyScM7hR2nhceAgScabPdebWU55x2AzFuEZLf8g=="
-        
+        azure_function_url = "https://hybridrecommender.azurewebsites.net/api/httpHybridTrigger?code=dfT6H1Fmgn29O23f12Q5zbhjmAfBkaAqMoXTmOOxTOHeAzFu8jLJvw=="
+                                
         try:
             # Envoyer une requête GET à la fonction Azure
             response = requests.get(
                 azure_function_url,
                 params={
-                    "user_id": user_id,
-                    "ref_start_date": ref_start_date,
-                    "ref_end_date": ref_end_date,
-                    "pred_start_date": pred_start_date,
-                    "pred_end_date": pred_end_date,
+                    "userid": user_id,
+                    "ref_start_date": ref_start_date.strftime('%Y-%m-%d'),
+                    "ref_end_date": ref_end_date.strftime('%Y-%m-%d'),
+                    "pred_start_date": pred_start_date.strftime('%Y-%m-%d'),
+                    "pred_end_date": pred_end_date.strftime('%Y-%m-%d'),
                 },
             )
 
@@ -51,21 +51,14 @@ if st.button("Recommander des articles"):
             response.raise_for_status()
 
             # Tenter de lire la réponse comme JSON
-            response_data = response.json()
+            top_articles = response.json()
 
-            # Vérifier que la réponse contient le champ 'top_articles'
-            if 'top_articles' in response_data:
-                top_articles = response_data["top_articles"]
-
-                # Afficher les résultats
-                st.header("Top 5 articles recommandés :")
-                for article in top_articles:
-                    st.write(f"ID de l'article : {article}")
-            else:
-                st.error("La réponse de la fonction Azure ne contient pas le champ 'top_articles'.")
+            # Afficher les résultats
+            st.header("Top 5 articles recommandés :")
+            for article in top_articles:
+                st.write(f"ID de l'article : {article}")
 
         except requests.exceptions.HTTPError as http_err:
             st.error(f"Erreur HTTP s'est produite: {http_err}")
         except Exception as err:
             st.error(f"Une erreur s'est produite: {err}")
-
